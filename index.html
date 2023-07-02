@@ -1,0 +1,33 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/105/three.min.js"></script>
+<script src="http://localhost:8080/panolens.min.js"></script>
+
+<script>
+    
+    
+    </script>
+    <html>
+        <head>
+
+
+            <script type="text/javascript">
+                window.onload = () => {
+                    const panorama = new PANOLENS.ImagePanorama( 'http://localhost:8080/frame.jpg' );
+                const imageContainer = document.querySelector(".image-container");
+
+                const viewer = new PANOLENS.Viewer({
+                   // container: imageContainer
+                });
+                viewer.add( panorama );
+                };
+              </script>
+
+
+        </head>
+        <body>
+
+            <div id="container" class="image-container"></div>
+
+        </body>
+
+    </html>
+    
