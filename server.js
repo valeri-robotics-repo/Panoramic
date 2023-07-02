@@ -7,8 +7,9 @@ http.createServer(function(req, res){
   var request = url.parse(req.url, true);
   var action = request.pathname;
 
-  if (action == '/frame.jpg') {
-     var img = fs.readFileSync('./frame.jpg');
+
+  if (action.endsWith('.jpg')) {
+     var img = fs.readFileSync('.' + action);
      res.writeHead(200, {'Content-Type': 'image/gif' });
      res.end(img, 'binary');
   } 
