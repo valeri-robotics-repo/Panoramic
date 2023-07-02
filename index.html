@@ -6,7 +6,9 @@
         <head>
             <script type="text/javascript">
                 window.onload = () => {
-                    const panorama = new PANOLENS.ImagePanorama( 'http://localhost:8080/GS010045.jpg' );
+                const img2 = document.createElement("img"); // Use DOM HTMLImageElement
+                img2.src = "GS010045.jpg";
+                const panorama = new PANOLENS.ImagePanorama( img2 );
                 const imageContainer = document.querySelector(".image-container");
 
                 const viewer = new PANOLENS.Viewer({
