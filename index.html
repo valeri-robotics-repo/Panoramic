@@ -5,16 +5,56 @@
     <html>
         <head>
             <script type="text/javascript">
-                window.onload = () => {
-                const img2 = document.createElement("img"); // Use DOM HTMLImageElement
-                img2.src = "GS010045.jpg";
-                const panorama = new PANOLENS.ImagePanorama( img2 );
-                const imageContainer = document.querySelector(".image-container");
 
-                const viewer = new PANOLENS.Viewer({
-                   // container: imageContainer
-                });
-                viewer.add( panorama );
+function setGaze (target) {
+    /**
+    * Set line of sight for panolens camera.
+    *
+    * Panolens uses `THREE.OrbitControls` as a way to control the camera
+    * so normal `THREE.PerspectiveCamera.rotation` does NOT work.
+    *
+    * @param  {THREE.Vector} target - Target to look at.
+    */
+
+    const { x, y, z } = target.normalize();
+    viewer.camera.position.set(x, -y, -z);
+}
+
+
+                window.onload = () => {
+                    
+                    var container, infospot;
+                    
+                    const img2 = document.createElement("img"); // Use DOM HTMLImageElement
+                    img2.src = "GS010045.jpg";
+                    const panorama2 = new PANOLENS.ImagePanorama( img2 );
+                    
+                    const img1 = document.createElement("img"); // Use DOM HTMLImageElement
+                    img1.src = "GS__0047.jpg";
+                    const panorama1 = new PANOLENS.ImagePanorama( img1 );
+
+                    infospot = new PANOLENS.Infospot( 500, PANOLENS.DataImage.Info );
+                    infospot.position.set( 5000, 100, -9000 );
+                    
+                    infospot.addHoverText( "The Other Side" );
+                    infospot.addEventListener( 'click', function(){
+                        viewer.setPanorama( panorama1 );
+                        viewer.camera.position.set(-0.6, -0.4, 0.5);
+                    } );
+
+                    panorama2.add( infospot );
+
+
+                    const imageContainer = document.querySelector(".image-container");
+
+                    const viewer = new PANOLENS.Viewer({
+
+                    // container: imageContainer
+                    });
+                    //viewer.add( panorama );
+                    viewer.add( panorama2, panorama1 );
+                    
+
                 };
               </script>
 
